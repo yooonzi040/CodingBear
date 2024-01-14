@@ -47,7 +47,7 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/et_id"
+            android:id="@+id/input_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -58,7 +58,7 @@
             android:inputType="text" />
 
         <EditText
-            android:id="@+id/et_pass"
+            android:id="@+id/input_pw"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -69,7 +69,7 @@
             android:inputType="text" />
 
         <EditText
-            android:id="@+id/et_name"
+            android:id="@+id/input_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -80,7 +80,7 @@
             android:inputType="text" />
 
         <EditText
-            android:id="@+id/et_age"
+            android:id="@+id/input_age"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -115,6 +115,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
+            android:onClick="onRegisterClicked"
             android:text="회원가입" />
     </LinearLayout>
 
