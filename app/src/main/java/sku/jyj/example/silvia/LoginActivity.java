@@ -54,7 +54,6 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         btn_tts.setOnClickListener(new View.OnClickListener(){
-
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, VoiceChatBotActivity.class);

@@ -39,10 +39,9 @@ import okhttp3.Response;
 public class VoiceChatBotActivity extends AppCompatActivity {
     private static final String urls = "http://192.168.0.4:5003/chatting"; // [★] Flask 서버 호출 URL
     private String savedUserInput; // [hyeonseok] userInputEditText에 입력받은 텍스트를 임시로 저장해놓기 위한 변수
-    Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
     SpeechRecognizer mRecognizer;
-    Button sttBtn = findViewById(R.id.sttStart);
     EditText userInputEditText;
+    Button sttBtn;
     RecyclerView chatRecyclerView;
     ChatAdapter chatAdapter;
     final int PERMISSION = 1;
@@ -53,12 +52,14 @@ public class VoiceChatBotActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_voicechatbot);
 
+
         if (Build.VERSION.SDK_INT >= 23) {
             // 퍼미션 체크
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.INTERNET,
                     Manifest.permission.RECORD_AUDIO}, PERMISSION);
         }
 
+        sttBtn = findViewById(R.id.sttStart);
         chatRecyclerView = findViewById(R.id.chatRecyclerView);
 
         if(chatRecyclerView != null) {
@@ -72,6 +73,8 @@ public class VoiceChatBotActivity extends AppCompatActivity {
         }
 
         userInputEditText = findViewById(R.id.userInputEditText);
+
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getPackageName());
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "ko-KR");
 
