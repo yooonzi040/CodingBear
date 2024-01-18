@@ -3,6 +3,7 @@ package sku.jyj.example.silvia;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -25,7 +26,8 @@ import okhttp3.Response;
 public class LoginActivity extends AppCompatActivity {
     private static final String urls = "http://192.168.0.4:5000/login"; // [★] Flask 서버 호출 URL
     private EditText login_id, login_pw;
-    private Button btn_login, btn_register, btn_tts;
+    private Button btn_login, btn_register, btn_tts, btn_voice;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +38,7 @@ public class LoginActivity extends AppCompatActivity {
         btn_register = findViewById(R.id.btn_register);
         btn_login = findViewById(R.id.btn_login);
         btn_tts = findViewById(R.id.btn_tts);
+        btn_voice = findViewById(R.id.btn_voice);
 
         btn_register.setOnClickListener(new View.OnClickListener() { //회원가입 버튼을 클릭 시 수행
             @Override
@@ -57,6 +60,14 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, VoiceChatBotActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btn_voice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, VoiceInput01Activity.class);
                 startActivity(intent);
             }
         });

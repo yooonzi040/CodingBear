@@ -20,6 +20,15 @@
         android:theme="@style/Theme.Silvia"
         tools:targetApi="31">
         <activity
+            android:name=".VoiceInput01Activity"
+            android:exported="false" />
+        <activity
+            android:name=".VoiceInput02Activity"
+            android:exported="false" />
+        <activity
+            android:name=".VoiceInput03Activity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity

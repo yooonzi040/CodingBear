@@ -60,33 +60,27 @@ public class VoiceChatBotActivity extends AppCompatActivity {
         }
 
         sttBtn = findViewById(R.id.sttStart);
+
         chatRecyclerView = findViewById(R.id.chatRecyclerView);
-
-        if(chatRecyclerView != null) {
-            chatAdapter = new ChatAdapter();
-            LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-
-            chatRecyclerView.setLayoutManager(layoutManager);
-            chatRecyclerView.setAdapter(chatAdapter);
-        } else {
-            Log.e("TAG", "RecyclerView is null");
-        }
+        chatAdapter = new ChatAdapter();
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        chatRecyclerView.setLayoutManager(layoutManager);
+        chatRecyclerView.setAdapter(chatAdapter);
 
         userInputEditText = findViewById(R.id.userInputEditText);
 
+        // RecognizerIntent 객체 생성
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getPackageName());
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "ko-KR");
 
-        if (sttBtn != null) {
-            sttBtn.setOnClickListener(v -> {
-                mRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
-                mRecognizer.setRecognitionListener(listener);
-                mRecognizer.startListening(intent);
-            });
-        } else {
-            Log.e("TAG", "sttBtn is null");
-        }
+
+        // 버튼을 클릭 이벤트 - 객체에 Context와 listener를 할당한 후 실행
+        sttBtn.setOnClickListener(v -> {
+            mRecognizer=SpeechRecognizer.createSpeechRecognizer(this);
+            mRecognizer.setRecognitionListener(listener);
+            mRecognizer.startListening(intent);
+        });
 
         // 텍스트 입력 전송 버튼 클릭 시
         Button sendButton = findViewById(R.id.sendButton);
