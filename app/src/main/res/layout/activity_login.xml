@@ -106,16 +106,22 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btn_register"
-                android:layout_width="210dp"
+                android:id="@+id/btn_tts"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:text="TTS" />
+
+            <Button
+                android:id="@+id/btn_register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="회원가입" />
 
             <Button
                 android:id="@+id/btn_login"
-                android:layout_width="210dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
                 android:layout_weight="1"

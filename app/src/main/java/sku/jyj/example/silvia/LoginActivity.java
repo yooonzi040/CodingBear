@@ -25,7 +25,7 @@ import okhttp3.Response;
 public class LoginActivity extends AppCompatActivity {
     private static final String urls = "http://192.168.0.4:5000/login"; // [★] Flask 서버 호출 URL
     private EditText login_id, login_pw;
-    private Button btn_login, btn_register;
+    private Button btn_login, btn_register, btn_tts;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,8 +33,9 @@ public class LoginActivity extends AppCompatActivity {
 
         login_id = findViewById(R.id.input_id);
         login_pw = findViewById(R.id.input_pw);
-        Button btn_register = findViewById(R.id.btn_register);
-        Button btn_login = findViewById(R.id.btn_login);
+        btn_register = findViewById(R.id.btn_register);
+        btn_login = findViewById(R.id.btn_login);
+        btn_tts = findViewById(R.id.btn_tts);
 
         btn_register.setOnClickListener(new View.OnClickListener() { //회원가입 버튼을 클릭 시 수행
             @Override
@@ -51,7 +52,17 @@ public class LoginActivity extends AppCompatActivity {
                sendServer();
             }
         });
+
+        btn_tts.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, VoiceChatBotActivity.class);
+                startActivity(intent);
+            }
+        });
     }
+
     public void sendServer() { // 서버로 데이터 전송하기 위한 함수
         class sendData extends AsyncTask<Void, Void, String> { // 백그라운드 쓰레드 생성
 
