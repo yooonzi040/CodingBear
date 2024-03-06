@@ -54,5 +54,3 @@ recording = false // 현재 녹음 중인지 확인용
 audioUrl = null // 오디오 파일 URL
 
 mediaPlayer = 안드로이드 재생 라이브러리 playing = false; // 현재 재생 중인지 확인용
-
-[주영] 확인 완료
