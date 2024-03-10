@@ -47,29 +47,7 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/input_id"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="16dp"
-            android:ems="10"
-            android:hint="아이디"
-            android:inputType="text" />
-
-        <EditText
-            android:id="@+id/input_pw"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginRight="16dp"
-            android:ems="10"
-            android:hint="비밀번호"
-            android:inputType="text" />
-
-        <EditText
-            android:id="@+id/input_name"
+            android:id="@+id/memberName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -80,7 +58,7 @@
             android:inputType="text" />
 
         <EditText
-            android:id="@+id/input_phoneno"
+            android:id="@+id/memberPhoneNo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -100,6 +78,35 @@
             android:onClick="onBitrhdayClicked"
             android:text="생년월일을 선택해주세요"
             android:textColorLink="#3F51B5" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:text="보호자 정보를 입력해 주세요" />
+
+        <EditText
+            android:id="@+id/guardianName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
+            android:ems="10"
+            android:hint="보호자 이름"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/guardianPhoneNo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="16dp"
+            android:ems="10"
+            android:hint="보호자 전화번호"
+            android:inputType="text" />
 
     </LinearLayout>
 

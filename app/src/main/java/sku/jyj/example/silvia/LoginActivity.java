@@ -16,6 +16,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -24,8 +25,8 @@ import okhttp3.Response;
 
 
 public class LoginActivity extends AppCompatActivity {
-    private static final String urls = "http://192.168.0.4:5000/login"; // [★] Flask 서버 호출 URL
-    private EditText login_id, login_pw;
+    private static final String urls = "http://192.168.0.4:5003/login"; // [★] Flask 서버 호출 URL
+    private EditText loginName, loginBrith, loginPhoneNo;
     private Button btn_login, btn_register, btn_tts, btn_voice;
     @SuppressLint("MissingInflatedId")
     @Override
@@ -33,8 +34,9 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        login_id = findViewById(R.id.input_id);
-        login_pw = findViewById(R.id.input_pw);
+        loginName = findViewById(R.id.loginName);
+        loginBrith = findViewById(R.id.loginBrith);
+        loginPhoneNo = findViewById(R.id.loginPhoneNo);
         btn_register = findViewById(R.id.btn_register);
         btn_login = findViewById(R.id.btn_login);
         btn_tts = findViewById(R.id.btn_tts);
@@ -48,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        //로그인 버튼 클릭시 sendServer 호출
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -97,8 +100,9 @@ public class LoginActivity extends AppCompatActivity {
                     OkHttpClient client = new OkHttpClient(); // OkHttp를 사용하도록 OkHttpClient 객체를 생성
 
                     JSONObject jsonInput = new JSONObject();  // JSON 객체 생성
-                    jsonInput.put("login_id", login_id.getText().toString()); // JSON 객체에 데이터 추가 (id)
-                    jsonInput.put("login_pw", login_pw.getText().toString()); // JSON 객체에 데이터 추가 (pw)
+                    jsonInput.put("login_name", loginName.getText().toString());
+                    jsonInput.put("login_birth", loginBrith.getText().toString());
+                    jsonInput.put("login_phone_no", loginPhoneNo.getText().toString());
 
                     RequestBody reqBody = RequestBody.create(
                             jsonInput.toString(),
