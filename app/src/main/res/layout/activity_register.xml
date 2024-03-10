@@ -47,7 +47,7 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/memberName"
+            android:id="@+id/input_Name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -58,7 +58,7 @@
             android:inputType="text" />
 
         <EditText
-            android:id="@+id/memberPhoneNo"
+            android:id="@+id/input_PhoneNo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -87,7 +87,7 @@
             android:text="보호자 정보를 입력해 주세요" />
 
         <EditText
-            android:id="@+id/guardianName"
+            android:id="@+id/input_guardianName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -98,7 +98,7 @@
             android:inputType="text" />
 
         <EditText
-            android:id="@+id/guardianPhoneNo"
+            android:id="@+id/input_guardianPhoneNo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"

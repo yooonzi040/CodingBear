@@ -25,22 +25,23 @@ import okhttp3.Response;
 
 
 public class LoginActivity extends AppCompatActivity {
-    private static final String urls = "http://192.168.0.4:5003/login"; // [★] Flask 서버 호출 URL
-    private EditText loginName, loginBrith, loginPhoneNo;
-    private Button btn_login, btn_register, btn_tts, btn_voice;
+    private static final String urls = "http://pascal0124.iptime.org:5003/login"; // [★] Flask 서버 호출 URL
+    private EditText input_loginName, input_loginBrith, input_loginPhoneNo;
+    private Button btn_login, btn_register, btn_tts, btn_voice, btn_settings;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        loginName = findViewById(R.id.loginName);
-        loginBrith = findViewById(R.id.loginBrith);
-        loginPhoneNo = findViewById(R.id.loginPhoneNo);
+        input_loginName = findViewById(R.id.input_loginName);
+        input_loginBrith = findViewById(R.id.input_loginBrith);
+        input_loginPhoneNo = findViewById(R.id.input_loginPhoneNo);
         btn_register = findViewById(R.id.btn_register);
         btn_login = findViewById(R.id.btn_login);
         btn_tts = findViewById(R.id.btn_tts);
         btn_voice = findViewById(R.id.btn_voice);
+        btn_settings = findViewById(R.id.btn_settings);
 
         btn_register.setOnClickListener(new View.OnClickListener() { //회원가입 버튼을 클릭 시 수행
             @Override
@@ -74,7 +75,16 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        btn_settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
     }
+
 
     public void sendServer() { // 서버로 데이터 전송하기 위한 함수
         class sendData extends AsyncTask<Void, Void, String> { // 백그라운드 쓰레드 생성
@@ -100,9 +110,9 @@ public class LoginActivity extends AppCompatActivity {
                     OkHttpClient client = new OkHttpClient(); // OkHttp를 사용하도록 OkHttpClient 객체를 생성
 
                     JSONObject jsonInput = new JSONObject();  // JSON 객체 생성
-                    jsonInput.put("login_name", loginName.getText().toString());
-                    jsonInput.put("login_birth", loginBrith.getText().toString());
-                    jsonInput.put("login_phone_no", loginPhoneNo.getText().toString());
+                    jsonInput.put("loginName", input_loginName.getText().toString());
+                    jsonInput.put("loginBrith", input_loginBrith.getText().toString());
+                    jsonInput.put("loginPhoneNo", input_loginPhoneNo.getText().toString());
 
                     RequestBody reqBody = RequestBody.create(
                             jsonInput.toString(),

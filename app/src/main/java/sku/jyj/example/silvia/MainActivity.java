@@ -19,9 +19,9 @@ public class MainActivity extends AppCompatActivity {
         phoneNo = findViewById(R.id.phoneNo);
 
         Intent intent = getIntent();
-        String memberName = intent.getStringExtra("member_name");
-        String memberBirth = intent.getStringExtra("member_birth");
-        String memberPhoneNo = intent.getStringExtra("member_phone_no");
+        String memberName = intent.getStringExtra("memberName");
+        String memberBirth = intent.getStringExtra("memberBirth");
+        String memberPhoneNo = intent.getStringExtra("guardianPhoneNo");
 
         name.setText(memberName);
         birth.setText(memberBirth);

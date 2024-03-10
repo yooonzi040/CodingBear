@@ -1,0 +1,41 @@
+package sku.jyj.example.silvia;
+
+import android.content.Intent;
+import android.os.Bundle;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+
+public class SettingsActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getSupportFragmentManager().beginTransaction()
+                .replace(android.R.id.content, new SettingsFragment())
+                .commit();
+    }
+
+    public static class SettingsFragment extends PreferenceFragmentCompat {
+        @Override
+        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            setPreferencesFromResource(R.xml.settings_preference, rootKey);
+
+            // "회원정보 수정" Preference 찾기
+            Preference userInfoPreference = findPreference("key_memberinfo");
+
+            // "회원정보 수정" Preference에 대한 클릭 리스너 설정
+            userInfoPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    // 클릭 이벤트 처리 및 UserInfoChangeActivity 시작
+                    Intent userInfoChangeIntent = new Intent(getActivity(), UserInfoChangeActivity.class);
+                    startActivity(userInfoChangeIntent);
+                    return true;
+                }
+            });
+        }
+    }
+}
