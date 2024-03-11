@@ -26,7 +26,7 @@ import okhttp3.Response;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String urls = "http://pascal0124.iptime.org:5003/login"; // [★] Flask 서버 호출 URL
-    private EditText input_loginName, input_loginBrith, input_loginPhoneNo;
+    private EditText input_loginName, input_loginBirth, input_loginPhoneNo;
     private Button btn_login, btn_register, btn_tts, btn_voice, btn_settings;
     @SuppressLint("MissingInflatedId")
     @Override
@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         input_loginName = findViewById(R.id.input_loginName);
-        input_loginBrith = findViewById(R.id.input_loginBrith);
+        input_loginBirth = findViewById(R.id.input_loginBirth);
         input_loginPhoneNo = findViewById(R.id.input_loginPhoneNo);
         btn_register = findViewById(R.id.btn_register);
         btn_login = findViewById(R.id.btn_login);
@@ -111,7 +111,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     JSONObject jsonInput = new JSONObject();  // JSON 객체 생성
                     jsonInput.put("loginName", input_loginName.getText().toString());
-                    jsonInput.put("loginBrith", input_loginBrith.getText().toString());
+                    jsonInput.put("loginBirth", input_loginBirth.getText().toString());
                     jsonInput.put("loginPhoneNo", input_loginPhoneNo.getText().toString());
 
                     RequestBody reqBody = RequestBody.create(

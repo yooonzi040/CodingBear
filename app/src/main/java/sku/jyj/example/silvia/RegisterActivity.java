@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -32,9 +31,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     // Flask 서버 호출
     private static final String urls = "http://pascal0124.iptime.org:5003/userJoin";
-    public Button btn_birth;
-    private String input_Birth;
-    private EditText input_guardianName, input_guardianPhoneNo, input_Name, input_PhoneNo;
+    private EditText input_guardianName, input_guardianPhoneNo, input_Name, input_PhoneNo, input_Birth;
     private Button bt_register;
     @Override
     protected void onCreate(Bundle savedInstanceState) { // 액티비티 시작시 처음으로 실행되는 생명주기
@@ -46,7 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
         input_guardianPhoneNo = findViewById(R.id.input_guardianPhoneNo);
         input_Name = findViewById(R.id.input_Name);
         input_PhoneNo = findViewById(R.id.input_PhoneNo);
-        btn_birth = findViewById(R.id.btn_birth);
+        input_Birth = findViewById(R.id.input_Birth);
         bt_register = findViewById(R.id.bt_register);
 
         // 전화번호 입력값 최대 길이 제한
@@ -66,29 +63,15 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    public void processDatePickerResult(int year, int month, int day){
-        String month_string = Integer.toString(month+1);
-        String day_string = Integer.toString(day);
-        String year_string = Integer.toString(year);
-        input_Birth = (month_string + "/" + day_string + "/" + year_string);
-
-        Toast.makeText(this,"Date: "+input_Birth,Toast.LENGTH_SHORT).show();
-
-        sendServer(input_Birth);
-    }
-
-    public void onBitrhdayClicked (View view) {
-        DatePickerFragment newFragment = new DatePickerFragment();
-        newFragment.show(getSupportFragmentManager(), "datePicker");
-    }
 
     public void onRegisterClicked(View view){ // 버튼 클릭 리스너
         // 버튼 클릭 시 서버로 데이터 전송
         Log.d("ClickButton1", "Button clicked");  // Log 추가
-        sendServer(input_Birth);
+        sendServer();
     }
 
-    public void sendServer(final String memberBirth){ // 서버로 데이터 전송하기 위한 함수
+
+    public void sendServer(){ // 서버로 데이터 전송하기 위한 함수
         class sendData extends AsyncTask<Void, Void, String> { // 백그라운드 쓰레드 생성
 
             @Override
@@ -133,7 +116,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                     jsonInput.put("memberName", input_Name.getText().toString());
                     jsonInput.put("memberPhoneNo", input_PhoneNo.getText().toString());
-                    jsonInput.put("memberBirth", memberBirth);
+                    jsonInput.put("memberBirth", input_Birth.getText().toString());
                     jsonInput.put("guardianName", input_guardianName.getText().toString());
                     jsonInput.put("guardianPhoneNo", input_guardianPhoneNo.getText().toString());
 

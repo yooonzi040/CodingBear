@@ -68,16 +68,16 @@
             android:hint="전화번호"
             android:inputType="text" />
 
-        <Button
-            android:id="@+id/btn_birth"
+        <EditText
+            android:id="@+id/input_Birth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginRight="16dp"
-            android:onClick="onBitrhdayClicked"
-            android:text="생년월일을 선택해주세요"
-            android:textColorLink="#3F51B5" />
+            android:ems="10"
+            android:hint="생년월일"
+            android:inputType="text" />
 
         <TextView
             android:id="@+id/textView11"
