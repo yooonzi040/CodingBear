@@ -26,7 +26,6 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 
-
 public class RegisterActivity extends AppCompatActivity {
 
     // Flask 서버 호출
@@ -63,13 +62,11 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-
     public void onRegisterClicked(View view){ // 버튼 클릭 리스너
         // 버튼 클릭 시 서버로 데이터 전송
         Log.d("ClickButton1", "Button clicked");  // Log 추가
         sendServer();
     }
-
 
     public void sendServer(){ // 서버로 데이터 전송하기 위한 함수
         class sendData extends AsyncTask<Void, Void, String> { // 백그라운드 쓰레드 생성
