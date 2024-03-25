@@ -86,7 +86,7 @@ public class UserInfoChangeActivity extends AppCompatActivity {
 
                         JSONObject jsonInput = new JSONObject();  // JSON 객체 생성
 
-                        jsonInput.put("PK_changePhoneNo", input_changePhoneNo.getText().toString());
+                        jsonInput.put("changePhoneNo", input_changePhoneNo.getText().toString());
                         jsonInput.put("changeName", input_changeName.getText().toString());
                         jsonInput.put("changeBirth", input_changeBirth.getText().toString());
                         jsonInput.put("changeGuardianName", input_changeGuardianName.getText().toString());

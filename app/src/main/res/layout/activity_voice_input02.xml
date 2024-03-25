@@ -17,7 +17,7 @@
             android:layout_height="50dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="2번 (3/2)"
+            android:text="2번 (2/3)"
             android:textSize="34sp" />
 
         <ImageView

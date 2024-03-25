@@ -27,7 +27,8 @@ import okhttp3.Response;
 public class LoginActivity extends AppCompatActivity {
     private static final String urls = "http://pascal0124.iptime.org:5003/login"; // [★] Flask 서버 호출 URL
     private EditText input_loginName, input_loginBirth, input_loginPhoneNo;
-    private Button btn_login, btn_register, btn_tts, btn_voice, btn_settings;
+    private Button btn_login, btn_register, btn_tts, btn_voice, btn_settings, btn_main;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         btn_tts = findViewById(R.id.btn_tts);
         btn_voice = findViewById(R.id.btn_voice);
         btn_settings = findViewById(R.id.btn_settings);
+        btn_main = findViewById(R.id.btn_main);
 
         btn_register.setOnClickListener(new View.OnClickListener() { //회원가입 버튼을 클릭 시 수행
             @Override
@@ -56,11 +58,11 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // EditText에 현재 입력되어있는 값을 get 해온다 (가져온다).
-               sendServer();
+                sendServer();
             }
         });
 
-        btn_tts.setOnClickListener(new View.OnClickListener(){
+        btn_tts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, VoiceChatBotActivity.class);
@@ -80,6 +82,15 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //테스트용 메인 엑티비티 이동하는 버튼
+        btn_main.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
@@ -143,21 +154,20 @@ public class LoginActivity extends AppCompatActivity {
 
     // 서버 응답 처리
     private void handleResponse(String response) {
-        // 서버 응답을 처리하는 부분입니다.
-        // 예를 들어, 서버에서 "success" 키가 true이면 로그인 성공, 그렇지 않으면 실패로 간주할 수 있습니다.
-        // 실제 서버 응답에 맞게 코드를 수정해주세요.
         try {
-            JSONObject jsonResponse = new JSONObject(response);
-            boolean success = jsonResponse.getBoolean("success"); // flask에서 json 응답을 받아온다. key값이 success인 값을 받아온다.
+            if (response != null) { // flask에서 json 응답을 받아온다. key값이 success인 값을 받아온다.
+                JSONObject jsonResponse = new JSONObject(response);
+                boolean success = jsonResponse.getBoolean("success");
 
-            if (success) { // success == True 인 경우
-                // 로그인 성공 시 MainActivity로 이동
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();  // 현재 액티비티 종료
-            } else { // success == False 인 경우
-                // 로그인 실패
-                Toast.makeText(LoginActivity.this, "로그인 실패", Toast.LENGTH_SHORT).show();
+                if (success) { // success == True 인 경우
+                    // 로그인 성공 시 MainActivity로 이동
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else { // success == False 인 경우
+                    // 로그인 실패
+                    Toast.makeText(LoginActivity.this, "로그인 실패", Toast.LENGTH_SHORT).show();
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();
