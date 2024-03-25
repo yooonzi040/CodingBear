@@ -18,12 +18,11 @@ btn_register = 회원가입 화면 이동 버튼
 
 btn_login = 로그인 성공 시 메인엑티비티 이동 버튼
 
-btn_settings = 설정 화면 이동 버튼 (테스트용)
+btn_settings = 설정 화면 이동 버튼 (로컬환경테스트용)
 
-btn_main = 메인 화면 이동 버튼 (테스트용)
+btn_main = 메인 화면 이동 버튼 (로컬환경테스트용)
 
 ### [로그아웃] - LogoutActivity 변수
-
 
 ### [회원가입] - RegisterActivity 변수
 input_Name = 회원가입 이름
@@ -68,3 +67,32 @@ recording = false // 현재 녹음 중인지 확인용
 audioUrl = null // 오디오 파일 URL
 
 mediaPlayer = 안드로이드 재생 라이브러리 playing = false; // 현재 재생 중인지 확인용
+
+### [설정] - SettingActivity 변수
+
+### [회원정보] - UserInfoActivity 변수
+
+memberNameTextView = 유저 이름 텍스트뷰
+
+memberBirthTextView = 유저 생년월일 텍스트뷰
+
+memberPhoneTextView = 유저 전화번호 텍스트뷰
+
+guardianNameTextView = 보호자 이름 텍스트뷰
+
+guardianPhoneTextView = 보호자 전화번호 텍스트뷰
+
+btn_userinfo_change = 사용자 정보 수정 화면 이동 버튼
+
+### [회원정보수정] - UserInfoChangeActivity 변수
+
+input_changeName = 수정할 이름
+
+input_changeBirth = 수정할 생년월일
+
+input_changePhoneNo = 수정할 전화번호
+
+input_changeGuardianName = 수정할 보호자 이름
+
+input_changeGuardianPhoneNo = 수정할 보호자 전화번호
+

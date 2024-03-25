@@ -1,8 +1,12 @@
 package sku.jyj.example.silvia;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -22,6 +26,8 @@ public class UserInfoActivity extends AppCompatActivity {
     private TextView guardianNameTextView;
     private TextView guardianPhoneTextView;
 
+    private Button btn_userinfo_change;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,9 +38,19 @@ public class UserInfoActivity extends AppCompatActivity {
         memberPhoneTextView = findViewById(R.id.memberPhoneTextView);
         guardianNameTextView = findViewById(R.id.guardianNameTextView);
         guardianPhoneTextView = findViewById(R.id.guardianPhoneTextView);
+        btn_userinfo_change = findViewById(R.id.btn_userinfo_change);
 
         // AsyncTask 실행
         new RetrieveUserInfoTask().execute();
+
+        //회원정보 수정으로 이동
+        btn_userinfo_change.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(UserInfoActivity.this, UserInfoChangeActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private class RetrieveUserInfoTask extends AsyncTask<Void, Void, String> {

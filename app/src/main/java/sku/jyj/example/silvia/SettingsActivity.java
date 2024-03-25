@@ -31,7 +31,7 @@ public class SettingsActivity extends AppCompatActivity {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
                     // 클릭 이벤트 처리 및 UserInfoChangeActivity 시작
-                    Intent userInfoChangeIntent = new Intent(getActivity(), UserInfoChangeActivity.class);
+                    Intent userInfoChangeIntent = new Intent(getActivity(), UserInfoActivity.class);
                     startActivity(userInfoChangeIntent);
                     return true;
                 }

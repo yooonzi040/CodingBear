@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.IOException;
@@ -42,6 +44,9 @@ public class UserInfoChangeActivity extends AppCompatActivity {
                 // 수정된 정보를 서버로 전송
                 Log.d("changebutton", "Button clicked");
                 sendServer();
+
+                //엑티비티 종료
+                finish();
             }
         });
     }
@@ -56,9 +61,16 @@ public class UserInfoChangeActivity extends AppCompatActivity {
                 }
 
                 @Override
-                protected void onPostExecute(String s) {
-                    super.onPostExecute(s);
+                protected void onPostExecute(String result) {
+                    super.onPostExecute(result);
                     // 백그라운드 작업이 끝난 후에 실행되는 부분
+                    if (result.equals("success")) {
+                        // 회원 정보가 수정되었다는 토스트 메시지 출력
+                        Toast.makeText(UserInfoChangeActivity.this, "회원 정보가 수정되었습니다", Toast.LENGTH_SHORT).show();
+                    } else {
+                        // 오류 메시지 출력
+                        Toast.makeText(UserInfoChangeActivity.this, "오류가 발생했습니다", Toast.LENGTH_SHORT).show();
+                    }
                 }
 
                 @Override
@@ -103,14 +115,20 @@ public class UserInfoChangeActivity extends AppCompatActivity {
                                 .build();
 
                         Response responses = client.newCall(request).execute(); // 요청을 실행 (동기 처리 : execute(), 비동기 처리 : enqueue())
-                        System.out.println(responses.body().string());
-
+                        if (responses.isSuccessful()) {
+                            // 요청 성공 시
+                            return "success";
+                        } else {
+                            // 요청 실패 시
+                            return "failure";
+                        }
                     } catch (JSONException e) {
                         e.printStackTrace();
+                        return "failure";
                     } catch (IOException e) {
                         e.printStackTrace();
+                        return "failure";
                     }
-                    return null;
                 }
             }
 
