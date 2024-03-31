@@ -60,7 +60,7 @@ public class VoiceInput01Activity extends AppCompatActivity {
         }
 
 
-        // 버튼을 클릭하면 녹음 시작
+        // '녹음' 버튼을 클릭하면 녹음 시작
         btn_record.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("NonConstantResourceId")
             @Override

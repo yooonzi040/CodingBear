@@ -1,5 +1,7 @@
 package sku.jyj.example.silvia;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -8,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,18 +19,17 @@ import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
+
+import com.google.gson.annotations.SerializedName;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 
 import okhttp3.MediaType;
@@ -35,13 +37,21 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.GET;
+import retrofit2.http.Path;
 
 public class VoiceChatBotActivity extends AppCompatActivity {
     private static final String urls = "http://192.168.0.4:5003/chatting"; // [★] Flask 서버 호출 URL
     private String savedUserInput; // [hyeonseok] userInputEditText에 입력받은 텍스트를 임시로 저장해놓기 위한 변수
     SpeechRecognizer mRecognizer;
+    MediaPlayer mplayer;
     EditText userInputEditText;
-    Button sttBtn;
+    ImageButton btn_sttStart;
+    Button btn_voiceplay;
     RecyclerView chatRecyclerView;
     ChatAdapter chatAdapter;
     final int PERMISSION = 1;
@@ -59,7 +69,8 @@ public class VoiceChatBotActivity extends AppCompatActivity {
                     Manifest.permission.RECORD_AUDIO}, PERMISSION);
         }
 
-        sttBtn = findViewById(R.id.sttStart);
+        btn_sttStart = findViewById(R.id.btn_sttStart);
+        btn_voiceplay = findViewById(R.id.btn_voiceplay);
 
         chatRecyclerView = findViewById(R.id.chatRecyclerView);
         chatAdapter = new ChatAdapter();
@@ -76,15 +87,16 @@ public class VoiceChatBotActivity extends AppCompatActivity {
 
 
         // 버튼을 클릭 이벤트 - 객체에 Context와 listener를 할당한 후 실행
-        sttBtn.setOnClickListener(v -> {
+        btn_sttStart.setOnClickListener(v -> {
             mRecognizer=SpeechRecognizer.createSpeechRecognizer(this);
             mRecognizer.setRecognitionListener(listener);
             mRecognizer.startListening(intent);
         });
 
         // 텍스트 입력 전송 버튼 클릭 시
-        Button sendButton = findViewById(R.id.sendButton);
-        sendButton.setOnClickListener(v -> {
+        Button btn_send = findViewById(R.id.btn_send);
+
+        btn_send.setOnClickListener(v -> {
             String userMessage = userInputEditText.getText().toString().trim();
             if (!userMessage.isEmpty()) {
                 savedUserInput = userMessage; // [hyeonseok] userInputEditText에 입력받은 텍스트를 임시로 저장
@@ -96,7 +108,52 @@ public class VoiceChatBotActivity extends AppCompatActivity {
                 // chatAdapter.addMessage(new ChatMessage("챗봇 응답", false));
             }
         });
+
+        // [yunzi] Android studio에서 wav 파일을 재생
+        btn_voiceplay.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                MediaPlayer mediaPlayer = MediaPlayer.create(getApplicationContext(),R.raw.alarm01);
+                mediaPlayer.start();
+            }
+        });
     }
+
+    // DTO 모델 - PostResult Class 선언
+    public class PostResult {
+
+        @SerializedName("userId")
+        private int userId;
+
+        @SerializedName("id")
+        private int id;
+        // @SerializedName으로 일치시켜 주지않을 경우엔 클래스 변수명이 일치해야함
+
+        private String title;
+        // @SerializedName()로 변수명을 입치시켜주면 클래스 변수명이 달라도 알아서 매핑시켜줌
+
+        @SerializedName("body")
+        private String bodyValue;
+
+        // toString()을 Override 해주지 않으면 객체 주소값을 출력함
+        @Override
+        public String toString() {
+            return "PostResult{" +
+                    "userId=" + userId +
+                    ", id=" + id +
+                    ", title='" + title + '\'' +
+                    ", bodyValue='" + bodyValue + '\'' +
+                    '}';
+        }
+    }
+
+    //Interface 정의 - 사용할 메소드 선언
+    public interface RetrofitService {
+
+        //@GET (EndPoint - 자원위치 (URL))
+        @GET("chatting/{chat}")
+        Call<PostResult> getPosts(@Path("chat")String post);
+    }
+
 
     // [hyeonseok] Android studio에서 flask로 데이터 전송
     public void ClickButton1(View v){ // 버튼 클릭 리스너
@@ -131,6 +188,7 @@ public class VoiceChatBotActivity extends AppCompatActivity {
                         chatAdapter.notifyDataSetChanged(); //  RecyclerView를 갱신하여 변경된 데이터를 화면에 반영하는 부분
                     } catch (JSONException e) {
                         e.printStackTrace();
+
                         // JSON 파싱 실패 시 단순 문자열로 처리
                         //chatAdapter.addMessage(new ChatMessage(response, false));
                         //chatAdapter.notifyDataSetChanged();

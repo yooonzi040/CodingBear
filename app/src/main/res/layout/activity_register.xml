@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,113 +8,160 @@
     android:orientation="vertical"
     tools:context=".RegisterActivity">
 
-    <LinearLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar1"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:background="#FF8C00"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="이전으로" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar1">
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="55dp"
+            android:layout_marginRight="20dp"
+            android:fontFamily="@font/font_login_header"
             android:gravity="center"
-            android:text="회원가입"
-            android:textSize="24sp" />
+            android:text="회원가입 (본인)"
+            android:textAppearance="@style/login_bold_text"
+            android:textSize="30sp" />
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:src="@drawable/chocolate"
-            tools:ignore="ContentDescription" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:text="회원정보를 입력해주세요" />
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout6"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="50dp"
+            android:fontFamily="@font/font_login_header"
+            android:lineSpacingExtra="-3sp"
+            android:text="본인 이름"
+            android:textAppearance="@style/login_text" />
 
         <EditText
             android:id="@+id/input_Name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginRight="16dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginRight="45dp"
+            android:background="@drawable/round_coner_input"
             android:ems="10"
             android:hint="이름"
-            android:inputType="text" />
+            android:inputType="text"
+            android:paddingLeft="20dp"
+            android:textColor="#000000"
+            android:textSize="20sp" />
 
-        <EditText
-            android:id="@+id/input_PhoneNo"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginRight="16dp"
-            android:ems="10"
-            android:hint="전화번호"
-            android:inputType="text" />
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="37dp"
+            android:fontFamily="@font/font_login_header"
+            android:text="본인 생년월일"
+            android:textAppearance="@style/login_text" />
 
         <EditText
             android:id="@+id/input_Birth"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginRight="16dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginRight="45dp"
+            android:background="@drawable/round_coner_input"
             android:ems="10"
             android:hint="생년월일"
-            android:inputType="date"/>
+            android:inputType="date"
+            android:paddingLeft="20dp"
+            android:textColor="#000000"
+            android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/textView11"
+            android:id="@+id/textView24"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:text="보호자 정보를 입력해 주세요" />
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="37dp"
+            android:fontFamily="@font/font_login_header"
+            android:text="본인 휴대폰 번호"
+            android:textAppearance="@style/login_text" />
 
         <EditText
-            android:id="@+id/input_guardianName"
+            android:id="@+id/input_PhoneNo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginRight="16dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginRight="45dp"
+            android:background="@drawable/round_coner_input"
             android:ems="10"
-            android:hint="보호자 이름"
-            android:inputType="text" />
+            android:hint="전화번호"
+            android:inputType="text"
+            android:paddingLeft="20dp"
+            android:textColor="#000000"
+            android:textSize="20sp" />
 
-        <EditText
-            android:id="@+id/input_guardianPhoneNo"
+        <TextView
+            android:id="@+id/textView25"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="16dp"
-            android:ems="10"
-            android:hint="보호자 전화번호"
-            android:inputType="text" />
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="40dp"
+            android:text="코딩곰 어플의 정보는 AES-256 암호화 및 최고 수준의 보안 처리 기술로 안전하게 저장되고 관리됩니다."
+            android:textAppearance="@style/login_text"
+            android:textColor="#697077"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/btn_next1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="65dp"
+            android:layout_marginTop="70dp"
+            android:layout_marginRight="65dp"
+            android:layout_marginBottom="50dp"
+            android:background="@drawable/round_corner_btn_next"
+            android:enabled="true"
+            android:text="다음으로 ->"
+            android:textColor="#FFFFFF"
+            android:textSize="22sp" />
 
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout5"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <Button
             android:id="@+id/bt_register"
@@ -126,4 +173,4 @@
             android:text="회원가입" />
     </LinearLayout>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

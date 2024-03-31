@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    android:orientation="vertical"
-    tools:context=".LoginActivity">
+    android:background="#FFFFFF">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/toolbar5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#FF8C00"
@@ -20,50 +17,53 @@
         app:title="이전으로" />
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
+        android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#FFFFFF"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar5">
 
         <TextView
-            android:id="@+id/textView7"
+            android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center_vertical"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="55dp"
             android:layout_marginRight="20dp"
             android:fontFamily="@font/font_login_header"
-            android:gravity="center_horizontal"
-            android:text="시작하기"
-            android:textAppearance="@style/login_bold_text" />
+            android:gravity="center"
+            android:text="회원가입 (보호자)"
+            android:textAppearance="@style/login_bold_text"
+            android:textSize="30sp" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayout3"
+        android:id="@+id/linearLayout6"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
+        app:layout_constraintVertical_bias="0.0">
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/textView11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="45dp"
             android:layout_marginTop="50dp"
-            android:layout_marginRight="20dp"
             android:fontFamily="@font/font_login_header"
-            android:lineSpacingExtra="-3sp"
-            android:text="이름"
+            android:text="보호자 이름"
             android:textAppearance="@style/login_text" />
-        />
 
         <EditText
-            android:id="@+id/input_id"
+            android:id="@+id/input_guardianName"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginLeft="45dp"
@@ -71,25 +71,21 @@
             android:layout_marginRight="45dp"
             android:background="@drawable/round_coner_input"
             android:ems="10"
-            android:hint=" 아이디"
-            android:inputType="text"
-            android:paddingLeft="20dp"
-            android:textColor="#000000"
-            android:textSize="20sp" />
+            android:hint="보호자 이름"
+            android:inputType="text" />
 
         <TextView
-            android:id="@+id/textView9"
+            android:id="@+id/textView38"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="45dp"
             android:layout_marginTop="37dp"
-            android:layout_marginRight="20dp"
             android:fontFamily="@font/font_login_header"
-            android:text="생년월일"
+            android:text="보호자 휴대폰 번호"
             android:textAppearance="@style/login_text" />
 
         <EditText
-            android:id="@+id/input_pw"
+            android:id="@+id/input_guardianPhoneNo"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginLeft="45dp"
@@ -97,89 +93,46 @@
             android:layout_marginRight="45dp"
             android:background="@drawable/round_coner_input"
             android:ems="10"
-            android:hint="생년월일"
-            android:inputType="text"
-            android:paddingLeft="20dp"
-            android:textColor="#000000"
-            android:textSize="20sp" />
+            android:hint="보호자 전화번호"
+            android:inputType="text" />
 
         <TextView
-            android:id="@+id/textView22"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="45dp"
-            android:layout_marginTop="37dp"
-            android:layout_marginRight="20dp"
-            android:fontFamily="@font/font_login_header"
-            android:text="휴대폰 번호"
-            android:textAppearance="@style/login_text" />
-
-        <EditText
-            android:id="@+id/editTextPhone"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginLeft="45dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginRight="45dp"
-            android:layout_weight="1"
-            android:background="@drawable/round_coner_input"
-            android:ems="10"
-            android:hint="휴대폰 번호"
-            android:inputType="phone"
-            android:paddingLeft="20dp"
-            android:textColor="#000000"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/textView23"
+            android:id="@+id/textView25"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="45dp"
             android:layout_marginTop="25dp"
             android:layout_marginRight="40dp"
-            android:text="코딩곰 어플의 정보는 AES-256 암호화 및 최고 수준의 보안 처리 기술로 안전하게 저장되고 관리됩니다."
+            android:text="감정 분석 결과를 보호자 및 의료 센터에 \n 전달하는 것에 대해 동의합니다."
             android:textAppearance="@style/login_text"
             android:textColor="#697077"
             android:textSize="14sp" />
 
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="12dp"
+            android:gravity="left"
+            android:text="CheckBox"
+            android:textColor="#000000" />
+
         <Button
-            android:id="@+id/btn_tts"
+            android:id="@+id/btn_next2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="65dp"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="100dp"
             android:layout_marginRight="65dp"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="55dp"
             android:background="@drawable/round_corner_btn_next"
             android:enabled="true"
             android:text="다음으로 ->"
             android:textColor="#FFFFFF"
             android:textSize="22sp" />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <Button
-            android:id="@+id/btn_voice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_weight="1"
-            android:text="Voice" />
-
-        <Button
-            android:id="@+id/btn_logins"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:layout_weight="1"
-            android:text="로그인" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

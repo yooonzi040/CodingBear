@@ -1,7 +1,10 @@
 package sku.jyj.example.silvia;
 
+import static sku.jyj.example.silvia.R.id.toolbar;
+
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -13,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import androidx.appcompat.widget.Toolbar;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,11 +35,17 @@ public class RegisterActivity extends AppCompatActivity {
     // Flask 서버 호출
     private static final String urls = "http://pascal0124.iptime.org:5003/userJoin";
     private EditText input_guardianName, input_guardianPhoneNo, input_Name, input_PhoneNo, input_Birth;
-    private Button bt_register;
+    private Button bt_register, btn_next1;
+
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) { // 액티비티 시작시 처음으로 실행되는 생명주기
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        Toolbar toolbar1 = findViewById(R.id.toolbar1);
+        setSupportActionBar(toolbar1);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //아이디 값 찾아주기
         input_guardianName = findViewById(R.id.input_guardianName);
@@ -44,6 +54,16 @@ public class RegisterActivity extends AppCompatActivity {
         input_PhoneNo = findViewById(R.id.input_PhoneNo);
         input_Birth = findViewById(R.id.input_Birth);
         bt_register = findViewById(R.id.bt_register);
+        btn_next1 = findViewById(R.id.btn_next1);
+
+
+        btn_next1.setOnClickListener(new View.OnClickListener() { //다음으로 버튼을 클릭 시 수행
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(RegisterActivity.this, Register2Activity.class);
+                startActivity(intent);
+            }
+        });
 
         // 전화번호 입력값 최대 길이 제한
         input_PhoneNo.addTextChangedListener(new TextWatcher() {

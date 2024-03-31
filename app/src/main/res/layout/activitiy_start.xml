@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_marginTop="165dp"
+        android:src="@drawable/example" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/font_login_header"
+        android:gravity="center_horizontal"
+        android:text="언제나 옆에 있는 친구 \n 실비아(Silvia)"
+        android:textColor="#FF8C00"
+        android:textSize="22sp" />
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="242dp"
+        android:layout_height="55dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="41dp"
+        android:background="@drawable/round_corner_btn_next"
+        android:fontFamily="@font/font_login_header"
+        android:onClick="onRegisterClicked"
+        android:text="만나기 ->"
+        android:textSize="22sp" />
+
+    <Button
+        android:id="@+id/btn_register"
+        android:layout_width="242dp"
+        android:layout_height="55dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/round_corner_stroke"
+        android:fontFamily="@font/font_login_header"
+        android:onClick="onRegisterClicked"
+        android:text="회원가입 ->"
+        android:textColor="#FE8B00"
+        android:textSize="22sp" />
+</LinearLayout>
