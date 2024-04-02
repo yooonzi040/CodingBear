@@ -42,8 +42,7 @@ public class LoginActivity extends AppCompatActivity {
         btn_login = findViewById(R.id.btn_login);
         btn_tts = findViewById(R.id.btn_tts);
         btn_voice = findViewById(R.id.btn_voice);
-        btn_settings = findViewById(R.id.btn_settings);
-        btn_main = findViewById(R.id.btn_main);
+        btn_settings = findViewById(R.id.btn_main_settings);
 
         btn_register.setOnClickListener(new View.OnClickListener() { //회원가입 버튼을 클릭 시 수행
             @Override
@@ -86,14 +85,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        //테스트용 메인 엑티비티 이동하는 버튼
-        btn_main.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
 
