@@ -45,7 +45,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 
 public class VoiceChatBotActivity extends AppCompatActivity {
-    private static final String urls = "http://192.168.0.4:5003/chatting"; // [★] Flask 서버 호출 URL
+    private static final String urls = "http://lovelace0124.iptime.org:5003/chatting"; // [★] Flask 서버 호출 URL
     private String savedUserInput; // [hyeonseok] userInputEditText에 입력받은 텍스트를 임시로 저장해놓기 위한 변수
     SpeechRecognizer mRecognizer;
     MediaPlayer mplayer;

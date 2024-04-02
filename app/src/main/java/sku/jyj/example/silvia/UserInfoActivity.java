@@ -58,7 +58,7 @@ public class UserInfoActivity extends AppCompatActivity {
         protected String doInBackground(Void... params) {
             try {
                 // 플라스크 서버 URL 설정
-                URL url = new URL("http://pascal0124.iptime.org:5003/userShowData");
+                URL url = new URL("http://lovelace0124.iptime.org:5003/userShowData");
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                 try {
                     InputStream in = urlConnection.getInputStream();

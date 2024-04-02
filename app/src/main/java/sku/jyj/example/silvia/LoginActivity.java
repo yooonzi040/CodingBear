@@ -1,26 +1,22 @@
 package sku.jyj.example.silvia;
 
 
-import static android.graphics.Color.rgb;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import androidx.appcompat.widget.Toolbar;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -29,9 +25,9 @@ import okhttp3.Response;
 
 
 public class LoginActivity extends AppCompatActivity {
-    private static final String urls = "http://192.168.0.4:5000/login"; // [★] Flask 서버 호출 URL
-    private EditText login_id, login_pw;
-    private Button btn_login, btn_register, btn_tts, btn_voice;
+    private static final String urls = "http://lovelace0124.iptime.org:5003/login"; // [★] Flask 서버 호출 URL
+    private EditText input_loginName, input_loginBirth, input_loginPhoneNo;
+    private Button btn_login, btn_register, btn_tts, btn_voice, btn_settings, btn_main;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -39,44 +35,38 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        login_id = findViewById(R.id.input_id);
-        login_pw = findViewById(R.id.input_pw);
-        btn_login = findViewById(R.id.btn_logins);
+        input_loginName = findViewById(R.id.input_loginName);
+        input_loginBirth = findViewById(R.id.input_loginBirth);
+        input_loginPhoneNo = findViewById(R.id.input_loginPhoneNo);
+        btn_register = findViewById(R.id.btn_register);
+        btn_login = findViewById(R.id.btn_login);
         btn_tts = findViewById(R.id.btn_tts);
         btn_voice = findViewById(R.id.btn_voice);
+        btn_settings = findViewById(R.id.btn_settings);
+        btn_main = findViewById(R.id.btn_main);
 
-
-        btn_login.setOnClickListener(new View.OnClickListener() {
+        btn_register.setOnClickListener(new View.OnClickListener() { //회원가입 버튼을 클릭 시 수행
             @Override
             public void onClick(View view) {
-                // EditText에 현재 입력되어있는 값을 get 해온다 (가져온다).
-               sendServer();
-            }
-        });
-
-        btn_tts.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, VoiceChatBotActivity.class);
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
             }
         });
 
-        btn_tts.setOnTouchListener(new View.OnTouchListener() {
+        //로그인 버튼 클릭시 sendServer 호출
+        btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
+            public void onClick(View view) {
+                // EditText에 현재 입력되어있는 값을 get 해온다 (가져온다).
+                sendServer();
+            }
+        });
 
-                if(motionEvent.getAction() == MotionEvent.ACTION_DOWN){
-                    btn_tts.setBackgroundColor(Color.rgb(64, 87, 128));
-                }
-                else if(motionEvent.getAction() == MotionEvent.ACTION_UP){
-                    btn_tts.setBackgroundColor(Color.rgb(255, 140, 0));
-                }
-                return false;
+        btn_tts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, VoiceChatBotActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -87,7 +77,25 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        btn_settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //테스트용 메인 엑티비티 이동하는 버튼
+        btn_main.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
+
 
     public void sendServer() { // 서버로 데이터 전송하기 위한 함수
         class sendData extends AsyncTask<Void, Void, String> { // 백그라운드 쓰레드 생성
@@ -113,8 +121,9 @@ public class LoginActivity extends AppCompatActivity {
                     OkHttpClient client = new OkHttpClient(); // OkHttp를 사용하도록 OkHttpClient 객체를 생성
 
                     JSONObject jsonInput = new JSONObject();  // JSON 객체 생성
-                    jsonInput.put("login_id", login_id.getText().toString()); // JSON 객체에 데이터 추가 (id)
-                    jsonInput.put("login_pw", login_pw.getText().toString()); // JSON 객체에 데이터 추가 (pw)
+                    jsonInput.put("loginName", input_loginName.getText().toString());
+                    jsonInput.put("loginBirth", input_loginBirth.getText().toString());
+                    jsonInput.put("loginPhoneNo", input_loginPhoneNo.getText().toString());
 
                     RequestBody reqBody = RequestBody.create(
                             jsonInput.toString(),
@@ -145,21 +154,20 @@ public class LoginActivity extends AppCompatActivity {
 
     // 서버 응답 처리
     private void handleResponse(String response) {
-        // 서버 응답을 처리하는 부분입니다.
-        // 예를 들어, 서버에서 "success" 키가 true이면 로그인 성공, 그렇지 않으면 실패로 간주할 수 있습니다.
-        // 실제 서버 응답에 맞게 코드를 수정해주세요.
         try {
-            JSONObject jsonResponse = new JSONObject(response);
-            boolean success = jsonResponse.getBoolean("success"); // flask에서 json 응답을 받아온다. key값이 success인 값을 받아온다.
+            if (response != null) { // flask에서 json 응답을 받아온다. key값이 success인 값을 받아온다.
+                JSONObject jsonResponse = new JSONObject(response);
+                boolean success = jsonResponse.getBoolean("success");
 
-            if (success) { // success == True 인 경우
-                // 로그인 성공 시 MainActivity로 이동
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();  // 현재 액티비티 종료
-            } else { // success == False 인 경우
-                // 로그인 실패
-                Toast.makeText(LoginActivity.this, "로그인 실패", Toast.LENGTH_SHORT).show();
+                if (success) { // success == True 인 경우
+                    // 로그인 성공 시 MainActivity로 이동
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else { // success == False 인 경우
+                    // 로그인 실패
+                    Toast.makeText(LoginActivity.this, "로그인 실패", Toast.LENGTH_SHORT).show();
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();

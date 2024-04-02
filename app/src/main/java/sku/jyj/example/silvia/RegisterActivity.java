@@ -33,7 +33,7 @@ import okhttp3.Response;
 public class RegisterActivity extends AppCompatActivity {
 
     // Flask 서버 호출
-    private static final String urls = "http://pascal0124.iptime.org:5003/userJoin";
+    private static final String urls = "http://lovelace0124.iptime.org:5003/userJoin";
     private EditText input_guardianName, input_guardianPhoneNo, input_Name, input_PhoneNo, input_Birth;
     private Button bt_register, btn_next1;
 

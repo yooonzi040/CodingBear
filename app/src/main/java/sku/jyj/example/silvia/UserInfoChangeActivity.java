@@ -21,7 +21,7 @@ import okhttp3.Response;
 
 public class UserInfoChangeActivity extends AppCompatActivity {
 
-    private static final String urls = "http://pascal0124.iptime.org:5003/userInfoChange";
+    private static final String urls = "http://lovelace0124.iptime.org:5003/userInfoChange";
     private String primaryKey; // 추가: 수정할 회원의 Primary Key
     private EditText input_changeName, input_changeBirth, input_changeGuardianName, input_changeGuardianPhoneNo, input_changePhoneNo;
     private Button changeButton;

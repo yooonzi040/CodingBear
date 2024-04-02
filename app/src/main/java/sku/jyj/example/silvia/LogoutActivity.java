@@ -20,7 +20,7 @@ public class LogoutActivity extends AsyncTask<Void, Void, Boolean> {
         try {
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
-                    .url("http://pascal0124.iptime.org:5003/logout")
+                    .url("http://lovelace0124.iptime.org:5003/logout")
                     .build();
             Response response = client.newCall(request).execute();
             return response.isSuccessful();
