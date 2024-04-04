@@ -10,15 +10,15 @@ input_loginBirth = 로그인 생년월일
 
 input_loginPhoneNo = 로그인 전화번호
 
-btn_voice = 목소리 등록 화면 이동 버튼
+~~btn_voice = 목소리 등록 화면 이동 버튼~~ 삭제 후 SettingsActicity로 이동
 
-btn_tts = TTS 화면 이동 버튼
+~~btn_tts = TTS 화면 이동 버튼~~ 삭제
 
-btn_register = 회원가입 화면 이동 버튼
+~~btn_register = 회원가입 화면 이동 버튼~~ 삭제 후 StartActivity로 이동
 
-btn_login = 로그인 성공 시 메인엑티비티 이동 버튼
+btn_loginToTTS = 로그인 성공 시 메인 엑티비티 이동 버튼
 
-btn_settings = 설정 화면 이동 버튼 (로컬환경테스트용)
+~~btn_settings = 설정 화면 이동 버튼 (로컬환경테스트용)~~ 삭제 후 VoiceChatBotActivity 으로 이동
 
 ~~btn_main = 메인 화면 이동 버튼 (로컬환경테스트용)~~ 삭제
 
@@ -31,11 +31,20 @@ input_PhoneNo = 회원가입 전화번호
 
 input_Birth = 회원가입 생년월일
 
+~~input_guardianName = 회원가입 보호자 이름~~ 삭제 후 Register2Activity로 이동
+
+~~input_guardianPhoneNo = 회원가입 보호자 전화번호~~ 삭제 후 Register2Activity로 이동
+
+btn_regist_userToTTS = 회원가입 버튼
+
+btn_InputGuardian = 보호자 정보 입력받는 Register2Activity로 화면 이동
+
+### [회원가입] - Register2Activity 변수
 input_guardianName = 회원가입 보호자 이름
 
 input_guardianPhoneNo = 회원가입 보호자 전화번호
 
-bt_register = 회원가입 버튼
+btn_next2 = 회원가입 완료 안내하는 Register3Activity로 화면 이동
 
 ### [메인화면] - MainActivity 변수
 btn_main_settings = 설정버튼
@@ -46,6 +55,8 @@ btn_main_Logout = 로그아웃 버튼
 btn_sttStart = STT 시작 버튼
 
 btn_send = 사용자 텍스트 입력 전송 버튼
+
+btn_settings = SettingsActivity로 화면 이동
 
 userInputEditText = 사용자 텍스트 입력 창
 
@@ -101,3 +112,8 @@ input_changeGuardianPhoneNo = 수정할 보호자 전화번호
 `로그아웃, 회원정보 조회/수정 구현` 버전 롤백
 `로그인, 회원가입, 초반부 디자인 1차 완성`버전과 병합
 `2024.04.02 디자인 프론트 최종 병합 버전` 으로 푸쉬
+
+#### [20240404] - 변경 사항 
+
+`1차 디자인(로그인, 회원가입)과 프론트엔드 최신 버전' 변수명 통합 및 정리
+README 파일에 수정 및 삭제된 변수명 입력
