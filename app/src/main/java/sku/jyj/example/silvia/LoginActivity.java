@@ -2,6 +2,7 @@ package sku.jyj.example.silvia;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -27,7 +28,7 @@ import okhttp3.Response;
 public class LoginActivity extends AppCompatActivity {
     private static final String urls = "http://lovelace0124.iptime.org:5003/login"; // [★] Flask 서버 호출 URL
     private EditText input_loginName, input_loginBirth, input_loginPhoneNo;
-    private Button btn_login, btn_register, btn_tts, btn_voice, btn_settings, btn_main;
+    private Button btn_loginToTTS;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -35,56 +36,27 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         input_loginName = findViewById(R.id.input_loginName);
         input_loginBirth = findViewById(R.id.input_loginBirth);
         input_loginPhoneNo = findViewById(R.id.input_loginPhoneNo);
-        btn_register = findViewById(R.id.btn_register);
-        btn_login = findViewById(R.id.btn_login);
-        btn_tts = findViewById(R.id.btn_tts);
-        btn_voice = findViewById(R.id.btn_voice);
-        btn_settings = findViewById(R.id.btn_main_settings);
+        btn_loginToTTS = findViewById(R.id.btn_loginToTTS); // [윤지] '로그인' 버튼
 
-        btn_register.setOnClickListener(new View.OnClickListener() { //회원가입 버튼을 클릭 시 수행
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                startActivity(intent);
-            }
-        });
+        // 아래 버튼들은 voicechatbot 화면쪽으로 넘어가야 함
 
-        //로그인 버튼 클릭시 sendServer 호출
-        btn_login.setOnClickListener(new View.OnClickListener() {
+        //[윤지] 로그인 버튼 클릭시 sendServer 호출 및 VoiceChatBotActivity로 이동
+        btn_loginToTTS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // EditText에 현재 입력되어있는 값을 get 해온다 (가져온다).
-                sendServer();
-            }
-        });
 
-        btn_tts.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, VoiceChatBotActivity.class);
                 startActivity(intent);
             }
         });
-
-        btn_voice.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, VoiceInput01Activity.class);
-                startActivity(intent);
-            }
-        });
-
-        btn_settings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, SettingsActivity.class);
-                startActivity(intent);
-            }
-        });
-
     }
 
 

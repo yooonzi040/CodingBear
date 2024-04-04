@@ -141,16 +141,28 @@
             android:textSize="14sp" />
 
         <Button
-            android:id="@+id/btn_next1"
+            android:id="@+id/btn_InputGuardian"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="65dp"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="50dp"
             android:layout_marginRight="65dp"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/round_corner_btn_next"
             android:enabled="true"
-            android:text="다음으로 ->"
+            android:text="보호자 정보 가입하기"
+            android:textColor="#FFFFFF"
+            android:textSize="22sp" />
+
+        <Button
+            android:id="@+id/btn_regist_userToTTS"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="65dp"
+            android:layout_marginRight="65dp"
+            android:background="@drawable/round_corner_btn_next"
+            android:enabled="true"
+            android:text="건너뛰기"
             android:textColor="#FFFFFF"
             android:textSize="22sp" />
 
@@ -161,16 +173,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <Button
-            android:id="@+id/bt_register"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:onClick="onRegisterClicked"
-            android:text="회원가입" />
-    </LinearLayout>
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

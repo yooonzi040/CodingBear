@@ -1,7 +1,5 @@
 package sku.jyj.example.silvia;
 
-import static sku.jyj.example.silvia.R.id.toolbar;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -15,7 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+
 import androidx.appcompat.widget.Toolbar;
 
 import org.json.JSONException;
@@ -35,7 +33,7 @@ public class RegisterActivity extends AppCompatActivity {
     // Flask 서버 호출
     private static final String urls = "http://lovelace0124.iptime.org:5003/userJoin";
     private EditText input_guardianName, input_guardianPhoneNo, input_Name, input_PhoneNo, input_Birth;
-    private Button bt_register, btn_next1;
+    private Button btn_InputGuardian, btn_regist_userToTTS;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -48,20 +46,28 @@ public class RegisterActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //아이디 값 찾아주기
-        input_guardianName = findViewById(R.id.input_guardianName);
-        input_guardianPhoneNo = findViewById(R.id.input_guardianPhoneNo);
         input_Name = findViewById(R.id.input_Name);
         input_PhoneNo = findViewById(R.id.input_PhoneNo);
         input_Birth = findViewById(R.id.input_Birth);
-        bt_register = findViewById(R.id.bt_register);
-        btn_next1 = findViewById(R.id.btn_next1);
+        btn_InputGuardian = findViewById(R.id.btn_InputGuardian);
+        btn_regist_userToTTS = findViewById(R.id.btn_regist_userToTTS);
 
-
-        btn_next1.setOnClickListener(new View.OnClickListener() { //다음으로 버튼을 클릭 시 수행
+        btn_InputGuardian.setOnClickListener(new View.OnClickListener() { //다음으로 버튼을 클릭 시 수행
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(RegisterActivity.this, Register2Activity.class);
                 startActivity(intent);
+            }
+        });
+
+        btn_regist_userToTTS.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(RegisterActivity.this, VoiceChatBotActivity.class);
+                startActivity(intent);
+                // 버튼 클릭시 서버로 데이터 전송
+                Log.d("ClickButton1" , "Button clicked"); // Log 추가
+                sendServer();
             }
         });
 
@@ -80,12 +86,6 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s){}
         });
-    }
-
-    public void onRegisterClicked(View view){ // 버튼 클릭 리스너
-        // 버튼 클릭 시 서버로 데이터 전송
-        Log.d("ClickButton1", "Button clicked");  // Log 추가
-        sendServer();
     }
 
     public void sendServer(){ // 서버로 데이터 전송하기 위한 함수
