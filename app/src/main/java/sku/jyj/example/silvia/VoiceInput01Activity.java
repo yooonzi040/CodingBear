@@ -25,7 +25,7 @@ import java.util.Date;
 public class VoiceInput01Activity extends AppCompatActivity {
 
     // Flask 서버 호출 URL
-    private static final String urls = "http://127.0.0.1:5001/hyeonseokzangzang";
+    private static final String urls = "http://172.17.0.1:7126/hyeonseokzangzang";
 
     //오디오 파일 녹음 관련 변수
     private MediaRecorder mediaRecorder;

@@ -26,7 +26,7 @@ public class Register3Activity extends AppCompatActivity {
         btn_next3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Register3Activity.this, VoiceChatBotActivity.class);
+                Intent intent = new Intent(Register3Activity.this, LoginActivity.class);
                 startActivity(intent);
             }
         });

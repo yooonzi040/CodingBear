@@ -28,8 +28,5 @@ public class VoiceInput03Activity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
-
-
 }

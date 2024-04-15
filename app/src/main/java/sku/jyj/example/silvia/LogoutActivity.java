@@ -20,7 +20,7 @@ public class LogoutActivity extends AsyncTask<Void, Void, Boolean> {
         try {
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
-                    .url("http://lovelace0124.iptime.org:5003/logout")
+                    .url("http://http://172.17.0.1:7126/logout")
                     .build();
             Response response = client.newCall(request).execute();
             return response.isSuccessful();
@@ -36,7 +36,7 @@ public class LogoutActivity extends AsyncTask<Void, Void, Boolean> {
             // 로그아웃 성공 처리
             Toast.makeText(mContext, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
             // 로그인 액티비티로 이동하도록 설정
-            Intent intent = new Intent(mContext, MainActivity.class);
+            Intent intent = new Intent(mContext, LoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             mContext.startActivity(intent);
         } else {

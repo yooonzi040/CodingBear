@@ -26,7 +26,7 @@ import okhttp3.Response;
 
 
 public class LoginActivity extends AppCompatActivity {
-    private static final String urls = "http://lovelace0124.iptime.org:5003/login"; // [★] Flask 서버 호출 URL
+    private static final String urls = "http://lovelace0124.asuscomm.com:7126/login"; // [★] Flask 서버 호출 URL
     private EditText input_loginName, input_loginBirth, input_loginPhoneNo;
     private Button btn_loginToTTS;
 
@@ -52,9 +52,10 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // EditText에 현재 입력되어있는 값을 get 해온다 (가져온다).
-
-                Intent intent = new Intent(LoginActivity.this, VoiceChatBotActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(LoginActivity.this, VoiceChatBotActivity.class);
+//                startActivity(intent);
+                // 버튼 클릭시 서버로 데이터 전송 후 로그인 정보가 맞을시 sendServer();에서 VoiceChatBotActivity로 이동
+                sendServer();
             }
         });
     }
@@ -75,7 +76,12 @@ public class LoginActivity extends AppCompatActivity {
                 // 백그라운드 작업이 끝난 후에 실행되는 부분
 
                 // 서버로부터의 응답을 처리
-                handleResponse(s);
+                if (s != null) {
+                    handleResponse(s);
+                } else {
+                    // 서버 응답이 없을 때 처리
+                    Toast.makeText(LoginActivity.this, "서버 응답이 없습니다.", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
@@ -105,6 +111,8 @@ public class LoginActivity extends AppCompatActivity {
                     e.printStackTrace();
                 } catch (IOException e) {
                     e.printStackTrace();
+                    // IOException 발생 시, null 반환하여 onPostExecute에서 처리
+                    return null;
                 }
                 return null;
             }
@@ -123,8 +131,8 @@ public class LoginActivity extends AppCompatActivity {
                 boolean success = jsonResponse.getBoolean("success");
 
                 if (success) { // success == True 인 경우
-                    // 로그인 성공 시 MainActivity로 이동
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    // 로그인 성공 시 VoiceChatBotActivity로 이동
+                    Intent intent = new Intent(LoginActivity.this, VoiceChatBotActivity.class);
                     startActivity(intent);
                     finish();
                 } else { // success == False 인 경우
