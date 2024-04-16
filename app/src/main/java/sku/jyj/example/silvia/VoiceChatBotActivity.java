@@ -51,7 +51,7 @@ public class VoiceChatBotActivity extends AppCompatActivity {
     MediaPlayer mplayer;
     EditText userInputEditText;
     ImageButton btn_sttStart;
-    Button btn_voiceplay;
+    Button btn_voiceplay, btn_settings;
     RecyclerView chatRecyclerView;
     ChatAdapter chatAdapter;
     final int PERMISSION = 1;
@@ -71,6 +71,7 @@ public class VoiceChatBotActivity extends AppCompatActivity {
 
         btn_sttStart = findViewById(R.id.btn_sttStart);
         btn_voiceplay = findViewById(R.id.btn_voiceplay);
+        btn_settings = findViewById(R.id.btn_settings);
 
         chatRecyclerView = findViewById(R.id.chatRecyclerView);
         chatAdapter = new ChatAdapter();
@@ -91,6 +92,14 @@ public class VoiceChatBotActivity extends AppCompatActivity {
             mRecognizer=SpeechRecognizer.createSpeechRecognizer(this);
             mRecognizer.setRecognitionListener(listener);
             mRecognizer.startListening(intent);
+        });
+
+        btn_settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(VoiceChatBotActivity.this, SettingsActivity.class);
+                startActivity(intent);
+            }
         });
 
         // 텍스트 입력 전송 버튼 클릭 시

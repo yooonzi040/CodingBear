@@ -3,6 +3,7 @@ package sku.jyj.example.silvia;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.Preference;
@@ -34,6 +35,21 @@ public class SettingsActivity extends AppCompatActivity {
                     Intent userInfoChangeIntent = new Intent(getActivity(), UserInfoActivity.class);
                     startActivity(userInfoChangeIntent);
                     return true;
+                }
+            });
+
+            // "목소리 수정" Preference 찾기
+            Preference voiceChangePreference = findPreference("key_tts_setting");
+
+            // "목소리 수정" Preference에 대한 클릭 리스너 설정
+            voiceChangePreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(@NonNull Preference preference) {
+                    // 클릭 이벤트 처리 및 voiceChangePreference 시작
+                    Intent voiceChangeIntent = new Intent(getActivity(), VoiceInput01Activity.class);
+                    startActivity(voiceChangeIntent);
+                    return true;
+
                 }
             });
         }

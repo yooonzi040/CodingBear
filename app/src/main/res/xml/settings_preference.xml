@@ -3,7 +3,7 @@
 
     <PreferenceScreen
         android:key="key_memberinfo"
-        android:title="회원정보">
+        android:title="회원정보 확인">
 
         <Preference
             android:key="key_user_info_change"

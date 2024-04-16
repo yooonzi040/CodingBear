@@ -7,6 +7,7 @@ import android.widget.Button;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 public class VoiceInput02Activity extends AppCompatActivity {
     private Button btn_record, btn_repeat, btn_check, btn_next;
@@ -28,6 +29,10 @@ public class VoiceInput02Activity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Toolbar voice_toolbar2 = findViewById(R.id.voice_toolbar2);
+        setSupportActionBar(voice_toolbar2);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 

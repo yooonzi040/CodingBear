@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 
 import java.io.File;
@@ -42,6 +43,7 @@ public class VoiceInput01Activity extends AppCompatActivity {
     private Intent intent;
 
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +60,10 @@ public class VoiceInput01Activity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.INTERNET,
                     Manifest.permission.RECORD_AUDIO}, PERMISSION);
         }
+
+        Toolbar voice_toolbar1 = findViewById(R.id.voice_toolbar1);
+        setSupportActionBar(voice_toolbar1);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         // '녹음' 버튼을 클릭하면 녹음 시작

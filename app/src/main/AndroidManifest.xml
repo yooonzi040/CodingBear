@@ -33,13 +33,13 @@
             android:exported="false"/>
         <activity
             android:name=".VoiceInput01Activity"
-            android:exported="false" />
+            android:parentActivityName=".SettingsActivity"/>
         <activity
             android:name=".VoiceInput02Activity"
-            android:exported="false" />
+            android:parentActivityName=".VoiceInput01Activity"/>
         <activity
             android:name=".VoiceInput03Activity"
-            android:exported="false" />
+            android:parentActivityName=".VoiceInput02Activity"/>
         <activity
             android:name=".MainActivity"
             android:exported="false" />
