@@ -25,7 +25,7 @@ import okhttp3.Response;
 public class Register2Activity extends AppCompatActivity {
 
     // Flask 서버 호출
-    private static final String urls = "http://lovelace0124.asuscomm.com:7126/userJoin";
+    private static final String urls = "http://lovelace0124.asuscomm.com:5003/userJoin";
 
     private Button btn_next2;
     private EditText input_guardianName, input_guardianPhoneNo;
@@ -55,8 +55,6 @@ public class Register2Activity extends AppCompatActivity {
         btn_next2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Register2Activity.this, Register3Activity.class);
-                startActivity(intent);
                 //서버로 회원가입정보 전송
                 sendServer(name, birth, phoneNo);
             }
@@ -76,8 +74,8 @@ public class Register2Activity extends AppCompatActivity {
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
                 // 백그라운드 작업이 끝난 후에 실행되는 부분
-                // LoginActivity로 이동
-                Intent intent = new Intent(Register2Activity.this, LoginActivity.class);
+                // Register3Activity로 이동
+                Intent intent = new Intent(Register2Activity.this, Register3Activity.class);
                 startActivity(intent);
             }
 

@@ -58,7 +58,7 @@ public class UserInfoActivity extends AppCompatActivity {
         protected String doInBackground(Void... params) {
             try {
                 // 플라스크 서버 URL 설정
-                URL url = new URL("http://172.17.0.1:7126/userShowData");
+                URL url = new URL("http://lovelace0124.asuscomm.com:5003/userShowData");
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                 try {
                     InputStream in = urlConnection.getInputStream();
