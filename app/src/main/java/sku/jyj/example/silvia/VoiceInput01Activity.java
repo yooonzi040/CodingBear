@@ -3,12 +3,18 @@ package sku.jyj.example.silvia;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -39,7 +45,9 @@ public class VoiceInput01Activity extends AppCompatActivity {
     private Boolean playing = false;
 
     final int PERMISSION = 1;
-    private Button btn_record, btn_repeat, btn_check, btn_next;
+    private Button  btn_repeat, btn_check, btn_next;
+    private ImageButton btn_record;
+    private TextView textView34, textView3;
     private Intent intent;
 
 
@@ -53,6 +61,34 @@ public class VoiceInput01Activity extends AppCompatActivity {
         btn_repeat = findViewById(R.id.btn_repeat);
         btn_check = findViewById(R.id.btn_check);
         btn_next = findViewById(R.id.btn_next);
+
+        // [윤지] textView34 중 특정 글자 문자열 바꾸기
+        textView34 = findViewById(R.id.textView34);
+
+        String content1 = textView34.getText().toString();
+        SpannableString spannableString = new SpannableString(content1);
+
+        String word1 = "원하는 목소리";
+        int start = content1.indexOf(word1);
+        int end = start + word1.length();
+
+        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#FF8C00")), start, end,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        textView34.setText(spannableString);
+
+        // [윤지] textView3 중 특정 글자 문자열 바꾸기
+        textView3 = findViewById(R.id.textView3);
+
+        String content2 = textView3.getText().toString();
+        SpannableString spannableString1 = new SpannableString(content2);
+
+        String word2 = "문장 읽어보기";
+        int start1 = content2.indexOf(word2);
+        int end1 = start1 + word1.length();
+
+        spannableString1.setSpan(new ForegroundColorSpan(Color.parseColor("#FF8C00")), start, end,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        textView3.setText(spannableString1);
 
 
         //퍼미션 체크

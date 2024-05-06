@@ -41,6 +41,9 @@
             android:name=".VoiceInput03Activity"
             android:parentActivityName=".VoiceInput02Activity"/>
         <activity
+            android:name=".VoiceChoiceActivity"
+            android:exported="false"/>
+        <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity

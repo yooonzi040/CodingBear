@@ -46,7 +46,7 @@ public class SettingsActivity extends AppCompatActivity {
                 @Override
                 public boolean onPreferenceClick(@NonNull Preference preference) {
                     // 클릭 이벤트 처리 및 voiceChangePreference 시작
-                    Intent voiceChangeIntent = new Intent(getActivity(), VoiceInput01Activity.class);
+                    Intent voiceChangeIntent = new Intent(getActivity(), VoiceChoiceActivity.class);
                     startActivity(voiceChangeIntent);
                     return true;
 

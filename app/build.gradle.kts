@@ -16,6 +16,10 @@ android {
 
     }
 
+    buildFeatures {
+        viewBinding =  true
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -44,5 +48,5 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0") // Retrofit2
     implementation("com.squareup.retrofit2:converter-gson:2.9.0") //
     implementation("com.squareup.retrofit2:converter-scalars:2.6.4") // Scalars 변환기 라이브러리
-
+    implementation("de.hdodenhof:circleimageview:3.1.0") //원형 imageView 사용 라이브러리
 }
