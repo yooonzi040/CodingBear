@@ -44,6 +44,10 @@
             android:name=".VoiceChoiceActivity"
             android:exported="false"/>
         <activity
+            android:name=".EmotionChoiceActivity"
+            android:exported="false"
+            android:parentActivityName=".VoiceChatBotActivity"/>
+        <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity

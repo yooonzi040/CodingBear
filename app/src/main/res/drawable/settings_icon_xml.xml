@@ -4,5 +4,6 @@
         android:drawable="@drawable/settings_icon"
         android:width="50dp"
         android:height="50dp"
+        android:gravity="center"
         />
 </selector>

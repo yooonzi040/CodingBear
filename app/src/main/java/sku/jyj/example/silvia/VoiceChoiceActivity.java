@@ -44,7 +44,7 @@ public class VoiceChoiceActivity extends AppCompatActivity {
         textView45.setText(spannableString);
 
         ArrayList<String> list = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 10; i++) {
             list.add(String.format("TEXT %d", i));
         }
 

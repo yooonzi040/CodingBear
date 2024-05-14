@@ -150,8 +150,7 @@
     <LinearLayout
         android:id="@+id/linearLayout10"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_height="82dp"
         android:background="#FFFFFF"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -159,12 +158,17 @@
 
         <Button
             android:id="@+id/btn_repeat"
-            android:layout_width="120dp"
-            android:layout_height="82dp"
-            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
             android:background="#FFFFFF"
-            android:text="다시\n말하기"
-            android:textColor="#000000"
+            android:drawableTop="@drawable/files_icon_xml"
+            android:fontFamily="@font/pretendard_medium"
+            android:paddingTop="18dp"
+            android:text="다시 말하기"
+            android:textColor="#696969"
+            android:textSize="16sp"
             app:cornerRadius="0dp" />
 
 
@@ -172,21 +176,27 @@
             android:id="@+id/btn_check"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="5dp"
             android:layout_weight="1"
             android:background="#FFFFFF"
-            android:textColor="#000000"
+            android:fontFamily="@font/pretendard_medium"
+            android:gravity="center"
+            android:paddingTop="18dp"
+            android:textColor="#696969"
+            android:textSize="16sp"
             app:cornerRadius="0dp" />
 
         <Button
             android:id="@+id/btn_next"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="5dp"
             android:layout_weight="1"
             android:background="#FFFFFF"
+            android:drawableTop="@drawable/settings_icon_xml"
             android:elevation="0dp"
             android:fontFamily="@font/pretendard_medium"
+            android:gravity="center"
+            android:paddingTop="15dp"
+            android:paddingBottom="5.5dp"
             android:text="다음으로"
             android:textColor="#696969"
             android:textSize="16sp"

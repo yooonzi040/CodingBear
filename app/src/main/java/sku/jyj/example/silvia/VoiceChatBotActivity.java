@@ -51,7 +51,7 @@ public class VoiceChatBotActivity extends AppCompatActivity {
     MediaPlayer mplayer;
     EditText userInputEditText;
     ImageButton btn_sttStart;
-    Button btn_voiceplay, btn_settings;
+    Button btn_voiceplay, btn_settings, btn_emo;
     RecyclerView chatRecyclerView;
     ChatAdapter chatAdapter;
     final int PERMISSION = 1;
@@ -72,6 +72,7 @@ public class VoiceChatBotActivity extends AppCompatActivity {
         btn_sttStart = findViewById(R.id.btn_sttStart);
         btn_voiceplay = findViewById(R.id.btn_voiceplay);
         btn_settings = findViewById(R.id.btn_settings);
+        btn_emo = findViewById(R.id.btn_emo);
 
         chatRecyclerView = findViewById(R.id.chatRecyclerView);
         chatAdapter = new ChatAdapter();
@@ -101,6 +102,15 @@ public class VoiceChatBotActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        btn_emo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(VoiceChatBotActivity.this, EmotionChoiceActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         // 텍스트 입력 전송 버튼 클릭 시
         Button btn_send = findViewById(R.id.btn_send);

@@ -3,7 +3,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="userMessageBackground">#00BCD4</color>
-    <color name="botMessageBackground">#8BC34A</color>
+    <color name="userMessageBackground">#4BC8AA</color>
+    <color name="botMessageBackground">#FF8C00</color>
 
 </resources>
