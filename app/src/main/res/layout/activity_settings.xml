@@ -67,8 +67,8 @@
             android:background="#FFFFFF"
             android:elevation="0dp"
             android:gravity="left|center_vertical"
-            android:text="회원정보 수정"
             android:stateListAnimator="@null"
+            android:text="회원정보"
             android:textColor="#000000" />
 
         <View
@@ -189,6 +189,20 @@
                 android:text="Switch" />
 
         </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:background="#FFFFFF"
+            android:elevation="0dp"
+            android:gravity="left|center_vertical"
+            android:stateListAnimator="@null"
+            android:text="로그아웃"
+            android:textColor="#ff0000"
+            android:onClick="logoutClicked" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

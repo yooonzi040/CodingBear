@@ -26,7 +26,7 @@ import okhttp3.Response;
 
 
 public class LoginActivity extends AppCompatActivity {
-    private static final String urls = "http://lovelace0124.asuscomm.com:5003/"; // [★] Flask 서버 호출 URL
+    private static final String urls = "http://lovelace0124.asuscomm.com:5003/login"; // [★] Flask 서버 호출 URL
     private EditText input_loginName, input_loginBirth, input_loginPhoneNo;
     private Button btn_loginToTTS;
 
