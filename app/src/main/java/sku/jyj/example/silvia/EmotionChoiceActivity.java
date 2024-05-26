@@ -1,5 +1,6 @@
 package sku.jyj.example.silvia;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Spannable;
@@ -22,7 +23,9 @@ public class EmotionChoiceActivity extends AppCompatActivity {
 
     private TextView textView53;
 
-    private Button emotionHappy, emotionSad, emotionSurprise, emotionHorror, emotionAngry, emotionDisgust;
+    private Button  emotionHappy, emotionSad, emotionSurprise, emotionHorror, emotionAngry, emotionDisgust;
+
+    Button btn_choicefin;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +34,16 @@ public class EmotionChoiceActivity extends AppCompatActivity {
         TableLayout tableLayout = findViewById(R.id.TableLayout);
         final ImageView imageView = findViewById(R.id.emotion_image);
         final TextView textView = findViewById(R.id.textView54);
+
+        btn_choicefin = findViewById(R.id.btn_choicefin);
+
+        btn_choicefin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(EmotionChoiceActivity.this, AnalysisActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         // [윤지] Toolbar에 뒤로가기 버튼 만들기

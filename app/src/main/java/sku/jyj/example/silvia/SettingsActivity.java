@@ -56,7 +56,7 @@ public class SettingsActivity extends AppCompatActivity {
             Preference logoutPreference = findPreference("key_logout");
 
             // "로그아웃" Preference에 대한 클릭 리스너 설정
-            logoutPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            /*logoutPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(@NonNull Preference preference) {
                     // 클릭 이벤트 처리 및 LogoutActivity 시작
@@ -64,7 +64,7 @@ public class SettingsActivity extends AppCompatActivity {
                     startActivity(logoutIntent);
                     return true;
                 }
-            });
+            });*/
         }
     }
 }

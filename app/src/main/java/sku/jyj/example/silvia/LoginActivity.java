@@ -6,11 +6,18 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -36,17 +43,20 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         input_loginName = findViewById(R.id.input_loginName);
         input_loginBirth = findViewById(R.id.input_loginBirth);
         input_loginPhoneNo = findViewById(R.id.input_loginPhoneNo);
         btn_loginToTTS = findViewById(R.id.btn_loginToTTS); // [윤지] '로그인' 버튼
+        Button btn_tosplash = findViewById(R.id.btn_tosplash);
 
-        // 아래 버튼들은 voicechatbot 화면쪽으로 넘어가야 함
-
+        btn_tosplash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               Intent intent = new Intent(LoginActivity.this, SplashActivity.class);
+               startActivity(intent);
+            }
+        });
         //[윤지] 로그인 버튼 클릭시 sendServer 호출 및 VoiceChatBotActivity로 이동
         btn_loginToTTS.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,6 +68,51 @@ public class LoginActivity extends AppCompatActivity {
                 sendServer();
             }
         });
+
+        // [윤지] textView34 중 특정 글자 문자열 바꾸기
+        TextView textView8 = findViewById(R.id.textView8);
+
+        String content1 = textView8.getText().toString();
+        SpannableString spannableString = new SpannableString(content1);
+
+        String word1 = "이름";
+        int start1 = content1.indexOf(word1);
+        int end1 = start1 + word1.length();
+
+        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#FF8C00")), start1, end1,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(new StyleSpan(Typeface.BOLD), start1, end1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        textView8.setText(spannableString);
+
+        // [윤지] textView34 중 특정 글자 문자열 바꾸기
+        TextView textView9 = findViewById(R.id.textView9);
+
+        String content2 = textView9.getText().toString();
+        SpannableString spannableString2 = new SpannableString(content2);
+
+        String word2 = "생년월일";
+        int start2 = content2.indexOf(word2);
+        int end2 = start2 + word2.length();
+
+        spannableString2.setSpan(new ForegroundColorSpan(Color.parseColor("#FF8C00")), start2, end2,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString2.setSpan(new StyleSpan(Typeface.BOLD), start2, end2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        textView9.setText(spannableString2);
+
+        // [윤지] textView34 중 특정 글자 문자열 바꾸기
+        TextView textView22 = findViewById(R.id.textView22);
+
+        String content3 = textView22.getText().toString();
+        SpannableString spannableString3 = new SpannableString(content3);
+
+        String word3 = "휴대폰 번호";
+        int start3 = content3.indexOf(word3);
+        int end3 = start3 + word3.length();
+
+        spannableString3.setSpan(new ForegroundColorSpan(Color.parseColor("#FF8C00")), start3, end3,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString3.setSpan(new StyleSpan(Typeface.BOLD), start3, end3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        textView22.setText(spannableString3);
     }
 
 

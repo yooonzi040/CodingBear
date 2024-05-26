@@ -4,10 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.InputFilter;
-import android.text.TextWatcher;
+import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,9 +25,15 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        Toolbar toolbar1 = findViewById(R.id.toolbar1);
-        setSupportActionBar(toolbar1);
+
+        Toolbar toolbar = findViewById(R.id.toolbar5);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("");
+
+        toolbar.getNavigationIcon().setColorFilter(Color.parseColor("#343A3F"), PorterDuff.Mode.SRC_ATOP);
+
+
 
         //아이디 값 찾아주기
         input_Name = findViewById(R.id.input_Name);
@@ -35,6 +41,7 @@ public class RegisterActivity extends AppCompatActivity {
         input_Birth = findViewById(R.id.input_Birth);
         btn_regist_userToTTS = findViewById(R.id.btn_regist_userToTTS);
         btn_InputGuardian = findViewById(R.id.btn_InputGuardian);
+        btn_InputGuardian.setText(Html.fromHtml("<u>보호자 정보 가입하기</u>"));
 
         btn_InputGuardian.setOnClickListener(new View.OnClickListener() { //다음으로 버튼을 클릭 시 수행
             @Override
@@ -64,7 +71,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         // 전화번호 입력값 최대 길이 제한
-        input_PhoneNo.addTextChangedListener(new TextWatcher() {
+        /*input_PhoneNo.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
@@ -79,4 +86,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s){}
         });
     }
-}
+
+         */
+}}
+

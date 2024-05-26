@@ -75,7 +75,7 @@ public class Register2Activity extends AppCompatActivity {
                 super.onPostExecute(s);
                 // 백그라운드 작업이 끝난 후에 실행되는 부분
                 // Register3Activity로 이동
-                Intent intent = new Intent(Register2Activity.this, Register3Activity.class);
+                Intent intent = new Intent(Register2Activity.this, WelcomeActivity.class);
                 startActivity(intent);
             }
 
