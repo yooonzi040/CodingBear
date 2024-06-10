@@ -18,7 +18,7 @@
         android:id="@+id/usernameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="35dp"
+        android:layout_marginStart="35dp"
         android:layout_marginTop="25dp"
         android:fontFamily="@font/pretendard_medium"
         android:text="환영합니다, 사용자님!"
@@ -29,10 +29,11 @@
 
     <Button
         android:id="@+id/btn_voice_settings"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="55dp"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="35dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/register_btnnext"
         android:enabled="true"
         android:fontFamily="@font/pretendard_medium"
@@ -46,10 +47,11 @@
 
     <Button
         android:id="@+id/btn_voice_conversation"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="55dp"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="35dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/register_btnnext"
         android:enabled="true"
         android:fontFamily="@font/pretendard_medium"
@@ -63,10 +65,11 @@
 
     <Button
         android:id="@+id/btn_main_settings"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="55dp"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="35dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/register_btnnext"
         android:enabled="true"
         android:fontFamily="@font/pretendard_medium"
@@ -80,10 +83,11 @@
 
     <Button
         android:id="@+id/btn_main_Logout"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="55dp"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="35dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/register_btnnext"
         android:enabled="true"
         android:fontFamily="@font/pretendard_medium"

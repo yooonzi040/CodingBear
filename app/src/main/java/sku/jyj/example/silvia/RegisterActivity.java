@@ -81,8 +81,8 @@ public class RegisterActivity extends AppCompatActivity {
                     boolean success = responseJson.getBoolean("success");
                     if (success) {
                         Toast.makeText(RegisterActivity.this, "회원가입 성공", Toast.LENGTH_SHORT).show();
-                        // 메인 화면으로 돌아가기
-                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                        // 로그인 화면으로 이동
+                        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                         startActivity(intent);
                         finish();
                     } else {

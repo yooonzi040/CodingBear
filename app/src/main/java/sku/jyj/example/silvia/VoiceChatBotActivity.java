@@ -15,13 +15,14 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.widget.Button;
-import android.widget.ScrollView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,7 +41,6 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class VoiceChatBotActivity extends AppCompatActivity {
-
     private static final String TAG = "VoiceChatBotActivity";
     private static final String BASE_URL = "http://lovelace0124.asuscomm.com:5003";
     private static final String UPLOAD_URL = BASE_URL + "/chatting";
@@ -53,45 +53,50 @@ public class VoiceChatBotActivity extends AppCompatActivity {
     private boolean recording = false;
     private int bufferSize;
     private ByteArrayOutputStream audioData;
-
     private MediaPlayer mediaPlayer;
     private Toast currentToast;
 
-    private Button btnSttStart;
+    private ImageButton btnSttStart;
     private Button btnVoicePlay;
     private Button btnSettings;
     private Button btnEmo;
-    private TextView chatTextView;
-    private ScrollView scrollView;
-
+    private RecyclerView chatRecyclerView;
+    private ChatAdapter chatAdapter;
     private Handler handler;
     private Runnable checkStatusRunnable;
     private static final int CHECK_INTERVAL = 5000; // 5 seconds
-
     private String sessionId;
-
     final int PERMISSION = 1;
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_voicechatbot);
 
+        // Request permissions
         if (Build.VERSION.SDK_INT >= 23) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.INTERNET,
-                    Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION);
+            ActivityCompat.requestPermissions(this, new String[]{
+                Manifest.permission.INTERNET,
+                Manifest.permission.RECORD_AUDIO,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            }, PERMISSION);
         }
 
+        // Initialize session ID
         SharedPreferences sharedPreferences = getSharedPreferences("user_session", Context.MODE_PRIVATE);
         sessionId = sharedPreferences.getString("session_id", null);
 
+        // Initialize UI elements
         btnSttStart = findViewById(R.id.btn_sttStart);
         btnVoicePlay = findViewById(R.id.btn_voiceplay);
         btnSettings = findViewById(R.id.btn_settings);
         btnEmo = findViewById(R.id.btn_emo);
-        chatTextView = findViewById(R.id.chatTextView);
-        scrollView = findViewById(R.id.scrollView);
-
+        chatRecyclerView = findViewById(R.id.chatRecyclerView);
+        chatRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        chatAdapter = new ChatAdapter();
+        chatRecyclerView.setAdapter(chatAdapter);
+        
+        // Button click listeners
         btnSttStart.setOnClickListener(v -> {
             if (!recording) {
                 startRecord();
@@ -118,9 +123,9 @@ public class VoiceChatBotActivity extends AppCompatActivity {
             }
         });
 
+        // Initialize AudioRecord
         bufferSize = AudioRecord.getMinBufferSize(44100,
                 AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT);
-
         audioRecord = new AudioRecord(MediaRecorder.AudioSource.MIC,
                 44100, AudioFormat.CHANNEL_IN_MONO,
                 AudioFormat.ENCODING_PCM_16BIT, bufferSize);
@@ -160,136 +165,81 @@ public class VoiceChatBotActivity extends AppCompatActivity {
             }
         } catch (IOException e) {
             e.printStackTrace();
-            showToast("오디오 파일 저장 중 오류가 발생했습니다.");
+            showToast("오디오 파 저장 중 오류가 발생했습니다.");
         }
     }
 
     private void uploadVoiceFile() {
         new UploadFileTask().execute();
-        showWaitingMessage();
-        startCheckingStatus();
     }
 
-    private void showWaitingMessage() {
-        runOnUiThread(() -> {
-            TextView textView = findViewById(R.id.textView48);
-            textView.setText("잠시만 기다려주세요, 응답이 진행중입니다!");
-        });
-    }
+    private class UploadFileTask extends AsyncTask<Void, Void, JSONObject> {
+        @Override
+        protected JSONObject doInBackground(Void... voids) {
+            try {
+                File tempAudioFile = File.createTempFile("temp_audio", ".pcm", getCacheDir());
+                try (FileOutputStream fos = new FileOutputStream(tempAudioFile)) {
+                    audioData.writeTo(fos);
+                }
 
-    private void startCheckingStatus() {
-        handler.postDelayed(checkStatusRunnable = new Runnable() {
-            @Override
-            public void run() {
-                checkStatus();
-                handler.postDelayed(this, CHECK_INTERVAL);
+                OkHttpClient client = new OkHttpClient.Builder()
+                        .connectTimeout(30, TimeUnit.SECONDS)
+                        .writeTimeout(30, TimeUnit.SECONDS)
+                        .readTimeout(30, TimeUnit.SECONDS)
+                        .build();
+
+                SharedPreferences sharedPreferences = getSharedPreferences("user_session", MODE_PRIVATE);
+                String sessionId = sharedPreferences.getString("session_id", null);
+
+                RequestBody requestBody = new MultipartBody.Builder()
+                        .setType(MultipartBody.FORM)
+                        .addFormDataPart("file", tempAudioFile.getName(),
+                                RequestBody.create(MediaType.parse("audio/pcm"), tempAudioFile))
+                        .addFormDataPart("session_id", sessionId)
+                        .addFormDataPart("file_name", "temp_audio") // 파일 이름 추가
+                        .build();
+
+                Request request = new Request.Builder()
+                        .url(UPLOAD_URL)
+                        .post(requestBody)
+                        .build();
+
+                Response response = client.newCall(request).execute();
+                if (response.isSuccessful()) {
+                    return new JSONObject(response.body().string());
+                } else {
+                    return null;
+                }
+            } catch (IOException | JSONException e) {
+                Log.e(TAG, "File upload failed", e);
+                return null;
             }
-        }, CHECK_INTERVAL);
-    }
-
-    private void stopCheckingStatus() {
-        handler.removeCallbacks(checkStatusRunnable);
-    }
-
-    private void checkStatus() {
-        SharedPreferences sharedPreferences = getSharedPreferences("user_session", MODE_PRIVATE);
-        String sessionId = sharedPreferences.getString("session_id", null);
-
-        if (sessionId == null) {
-            return;
         }
 
-        OkHttpClient client = new OkHttpClient.Builder()
-                .connectTimeout(30, TimeUnit.SECONDS)
-                .writeTimeout(30, TimeUnit.SECONDS)
-                .readTimeout(30, TimeUnit.SECONDS)
-                .build();
-
-        Request request = new Request.Builder()
-                .url(CHECK_STATUS_URL + "?session_id=" + sessionId)
-                .build();
-
-        client.newCall(request).enqueue(new okhttp3.Callback() {
-            @Override
-            public void onFailure(okhttp3.Call call, IOException e) {
-                e.printStackTrace();
-                showToast("상태 확인 중 오류가 발생했습니다. 다시 시도해 주세요.");
-            }
-
-            @Override
-            public void onResponse(okhttp3.Call call, Response response) throws IOException {
-                if (!response.isSuccessful()) {
-                    showToast("상태 확인에 실패했습니다. 다시 시도해 주세요.");
-                    return;
-                }
-
+        @Override
+        protected void onPostExecute(JSONObject result) {
+            if (result != null) {
                 try {
-                    JSONObject result = new JSONObject(response.body().string());
-                    String status = result.getString("status");
+                    boolean success = result.getBoolean("success");
+                    if (success) {
+                        String transcribedText = result.getString("transcribed_text");
+                        String responseText = result.getString("response_text");
 
-                    if ("completed".equals(status)) {
-                        stopCheckingStatus();
-                        getVoiceResponse();
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    showToast("상태 처리 중 오류가 발생했습니다. 다시 시도해 주세요.");
-                }
-            }
-        });
-    }
-
-    private void getVoiceResponse() {
-        SharedPreferences sharedPreferences = getSharedPreferences("user_session", MODE_PRIVATE);
-        String sessionId = sharedPreferences.getString("session_id", null);
-
-        if (sessionId == null) {
-            return;
-        }
-
-        OkHttpClient client = new OkHttpClient.Builder()
-                .connectTimeout(30, TimeUnit.SECONDS)
-                .writeTimeout(30, TimeUnit.SECONDS)
-                .readTimeout(30, TimeUnit.SECONDS)
-                .build();
-
-        Request request = new Request.Builder()
-                .url(GET_RESPONSE_URL + "?session_id=" + sessionId)
-                .build();
-
-        client.newCall(request).enqueue(new okhttp3.Callback() {
-            @Override
-            public void onFailure(okhttp3.Call call, IOException e) {
-                e.printStackTrace();
-                showToast("응답을 가져오는 중 오류가 발생했습니다. 다시 시도해 주세요.");
-            }
-
-            @Override
-            public void onResponse(okhttp3.Call call, Response response) throws IOException {
-                if (!response.isSuccessful()) {
-                    showToast("응답을 가져오는 데 실패했습니다. 다시 시도해 주세요.");
-                    return;
-                }
-
-                try {
-                    JSONObject result = new JSONObject(response.body().string());
-                    String transcribedText = result.getString("transcribed_text");
-                    String responseText = result.getString("response_text");
-
-                    runOnUiThread(() -> {
-                        Log.d("VoiceChatBotActivity", "Adding message: " + responseText + " (isUser: " + transcribedText + ")");
                         addChatMessage(transcribedText, true); // 사용자의 메시지 추가
                         addChatMessage(responseText, false); // 챗봇의 응답 추가
-                        // "응답이 진행중입니다" 메시지 제거
-                        TextView waitingMessage = findViewById(R.id.textView48);
-                        waitingMessage.setText("마이크 버튼을 눌러\n실비아와 대화해볼까요?");
-                    });
+
+                        showToast("파일 업로드 및 응답 성공");
+                    } else {
+                        showToast("파일 업로드 실패: " + result.getString("message"));
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                     showToast("응답 처리 중 오류가 발생했습니다. 다시 시도해 주세요.");
                 }
+            } else {
+                showToast("파일 업로드 실패");
             }
-        });
+        }
     }
 
     private void playVoiceResponse(String sessionId) {
@@ -354,58 +304,9 @@ public class VoiceChatBotActivity extends AppCompatActivity {
 
     private void addChatMessage(String message, boolean isUser) {
         runOnUiThread(() -> {
-            chatTextView.append((isUser ? "User: " : "Bot: ") + message + "\n");
-            scrollView.post(() -> scrollView.fullScroll(ScrollView.FOCUS_DOWN));
+            chatAdapter.addMessage(new ChatMessage(message, isUser));
+            chatRecyclerView.scrollToPosition(chatAdapter.getItemCount() - 1);
         });
-    }
-
-    private class UploadFileTask extends AsyncTask<Void, Void, Boolean> {
-        @Override
-        protected Boolean doInBackground(Void... voids) {
-            try {
-                File tempAudioFile = File.createTempFile("temp_audio", ".pcm", getCacheDir());
-                try (FileOutputStream fos = new FileOutputStream(tempAudioFile)) {
-                    audioData.writeTo(fos);
-                }
-
-                OkHttpClient client = new OkHttpClient.Builder()
-                        .connectTimeout(30, TimeUnit.SECONDS)
-                        .writeTimeout(30, TimeUnit.SECONDS)
-                        .readTimeout(30, TimeUnit.SECONDS)
-                        .build();
-
-                SharedPreferences sharedPreferences = getSharedPreferences("user_session", MODE_PRIVATE);
-                String sessionId = sharedPreferences.getString("session_id", null);
-
-                RequestBody requestBody = new MultipartBody.Builder()
-                        .setType(MultipartBody.FORM)
-                        .addFormDataPart("file", tempAudioFile.getName(),
-                                RequestBody.create(MediaType.parse("audio/pcm"), tempAudioFile))
-                        .addFormDataPart("session_id", sessionId)
-                        .addFormDataPart("file_name", "temp_audio") // 파일 이름 추가
-                        .build();
-
-                Request request = new Request.Builder()
-                        .url(UPLOAD_URL)
-                        .post(requestBody)
-                        .build();
-
-                Response response = client.newCall(request).execute();
-                return response.isSuccessful();
-            } catch (IOException e) {
-                Log.e(TAG, "File upload failed", e);
-                return false;
-            }
-        }
-
-        @Override
-        protected void onPostExecute(Boolean success) {
-            if (success) {
-                showToast("파일 업로드 성공");
-            } else {
-                showToast("파일 업로드 실패");
-            }
-        }
     }
 
     private void showToast(final String message) {
